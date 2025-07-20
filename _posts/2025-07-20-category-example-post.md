@@ -3,25 +3,117 @@ layout: post
 category: example2
 ---
 
-Mauris viverra dictum ultricies. Vestibulum quis ipsum euismod, facilisis metus sed, varius ipsum. Donec scelerisque lacus libero, eu dignissim sem venenatis at. Nunc a egestas tortor, sed feugiat leo.
+<style>
+.lang-align {
+  text-align: left;
+  margin: 1.5rem 0;
+}
+.lang-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0 1rem;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-family: system-ui, sans-serif;
+}
+.lang-option img {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+}
+</style>
 
-## Table of contents
-- [Table of contents](#table-of-contents)
+<div id="lang-switch" class="lang-align">
+  <span class="lang-option" onclick="switchLang('en')">
+    <img src="https://flagcdn.com/us.svg" alt="English flag"> English
+  </span>
+  <span class="lang-option" onclick="switchLang('kr')">
+    <img src="https://flagcdn.com/kr.svg" alt="Korean flag"> 한국어
+  </span>
+  <span class="lang-option" onclick="switchLang('cn')">
+    <img src="https://flagcdn.com/cn.svg" alt="Chinese flag"> 中文
+  </span>
+</div>
+
+{% capture lang_en %}
+<!---------------------------------------------- ENGLISH SECTION ---------------------------------------------->
+## English Section
+
+This is the English content.
+
+### Table of contents
 - [The start](#the-start)
 - [The middle](#the-middle)
 - [The end](#the-end)
 
-Mauris viverra dictum ultricies. Vestibulum quis ipsum euismod, facilisis metus sed, varius ipsum. Donec scelerisque lacus libero, eu dignissim sem venenatis at. Nunc a egestas tortor, sed feugiat leo. Vestibulum porta tincidunt tellus, vitae ornare tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed nunc neque, tempor in iaculis non, faucibus et metus. Etiam id nisl ut lorem gravida euismod.
+### The start
 
-## [The start](#the-start)
+Start paragraph.
 
-Fusce non velit cursus ligula mattis convallis vel at metus. Sed pharetra tellus massa, non elementum eros vulputate non. Suspendisse potenti. Quisque arcu felis, laoreet vel accumsan sit amet, fermentum at nunc. Sed massa quam, auctor in eros quis, porttitor tincidunt orci. Nulla convallis id sapien ornare viverra. Cras nec est lacinia ligula porta tincidunt. Nam a est eget ligula pellentesque posuere. Maecenas quis enim ac risus accumsan scelerisque. Aliquam vitae libero sapien. Etiam convallis, metus nec suscipit condimentum, quam massa congue velit, sit amet sollicitudin nisi tortor a lectus. Cras a arcu enim. Suspendisse hendrerit euismod est ac gravida. Donec vitae elit tristique, suscipit eros at, aliquam augue. In ac faucibus dui. Sed tempor lacus tristique elit sagittis, vitae tempor massa convallis.
+### The middle
 
-## [The middle](#the-middle)
+Middle paragraph.
 
-Proin quis velit et eros auctor laoreet. Aenean eget nibh odio. Suspendisse mollis enim pretium, fermentum urna vitae, egestas purus. Donec convallis tincidunt purus, scelerisque fermentum eros sagittis vel. Aliquam ac aliquet risus, tempus iaculis est. Fusce molestie mauris non interdum hendrerit. Curabitur ullamcorper, eros vitae interdum volutpat, lacus magna lacinia turpis, at accumsan dui tortor vel lectus. Aenean risus massa, semper non lectus rutrum, facilisis imperdiet mi. Praesent sed quam quis purus auctor ornare et sed augue. Vestibulum non quam quis ligula luctus placerat sed sit amet erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce auctor, sem eu volutpat dignissim, turpis nibh malesuada arcu, in consequat elit mauris quis sem. Nam tristique sit amet enim vel accumsan. Sed id nibh commodo, dictum sem id, semper quam.
+### The end
 
-## The end
+End paragraph.
+{% endcapture %}
 
-Donec ex lectus, tempus non lacinia quis, pretium non ipsum. Praesent est nunc, rutrum vel tellus eu, tristique laoreet purus. In rutrum orci sit amet ex ornare, sit amet finibus lacus laoreet. Etiam ac facilisis purus, eget porttitor odio. Suspendisse tempus dolor nec risus sodales posuere. Proin dui dui, mollis a consectetur molestie, lobortis vitae tellus. Vivamus at purus sed urna sollicitudin mattis. Mauris lacinia libero in lobortis pulvinar. Nullam sit amet condimentum justo. Donec orci justo, pharetra ut dolor non, interdum finibus orci. Proin vitae ante a dui sodales commodo ac id elit. Nunc vel accumsan nunc, sit amet congue nunc. Aliquam in lacinia velit. Integer lobortis luctus eros, in fermentum metus aliquet a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+{% capture lang_kr %}
+<!---------------------------------------------- KOREAN SECTION ---------------------------------------------->
+## 한국어 섹션
 
+이건 한국어 콘텐츠입니다.
+
+### 시작
+
+시작 부분입니다.
+
+### 중간
+
+중간 부분입니다.
+
+### 끝
+
+끝입니다.
+{% endcapture %}
+
+{% capture lang_cn %}
+<!---------------------------------------------- CHINESE SECTION ---------------------------------------------->
+## 中文部分
+
+这是中文内容。
+
+### 开始
+
+开始部分。
+
+### 中间
+
+中间段落。
+
+### 结束
+
+结束内容。
+{% endcapture %}
+
+<div class="lang-block" data-lang="en">
+  {{ lang_en | markdownify }}
+</div>
+
+<div class="lang-block" data-lang="kr" style="display: none;">
+  {{ lang_kr | markdownify }}
+</div>
+
+<div class="lang-block" data-lang="cn" style="display: none;">
+  {{ lang_cn | markdownify }}
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.lang-block').forEach(el => {
+    el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
+  });
+}
+</script>
