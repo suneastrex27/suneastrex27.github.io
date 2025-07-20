@@ -1,8 +1,10 @@
 ---
 layout: page
-title: About
+title: BIO
 ---
 
-This is an example page!
+`@suneastrex27` - Vulnerability Researcher
 
-It's very similar to a `post` layout, with the only difference that the publish date is not shown!
+Red Team Ops, Exploits, Math, Protocol Design
+
+Currently conducting Red Team operations at a top 5 global crypto exchange.
