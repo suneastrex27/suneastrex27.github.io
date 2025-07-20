@@ -2,21 +2,35 @@
 layout: post
 ---
 
-This post is here to test [$$\jektex$$](https://github.com/yagarea/jektex),
-a lightweight jekyll plugin for LaTeX rendering $$\LaTeX$$.
-
-## Inline example
-Lorem ipsum dolor sit amet, consectetur $$e^{i\theta}=\cos(\theta)+i\sin(\theta)$$
-adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-## Display example
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua.
-
-$$
-(a + b)^2 = a^2 + 2ab + b^2
-$$
-
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
 ea commodo consequat.
+
+\( a^2 + b^2 = c^2 \)
+
+\( \frac{1}{n} \sum_{i=1}^n x_i \)
+
+\( \int_0^\infty e^{-x^2} dx = \sqrt{\pi} \)
+
+\( \lim_{x \to 0} \frac{\sin x}{x} = 1 \)
+
+\( \forall \epsilon > 0, \exists \delta > 0 \)
+
+$$
+E = mc^2
+$$
+
+$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+
+$$
+\left( \sum_{i=1}^{n} x_i \right)^2 \leq n \sum_{i=1}^{n} x_i^2
+$$
+
+$$
+\begin{matrix}
+a & b \\
+c & d
+\end{matrix}
+$$
 
