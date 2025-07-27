@@ -1,6 +1,6 @@
 ---
 layout: page
-title: BIO
+title: About
 ---
 
 `@suneastrex27` - Vulnerability Researcher
