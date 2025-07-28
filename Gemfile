@@ -11,5 +11,6 @@ gem "logger"
 gem "jekyll"
 gem "jektex"
 gem "jekyll-remote-theme"
+gem 'jekyll-gist'
 
 gemspec
