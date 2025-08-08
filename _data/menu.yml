@@ -5,13 +5,3 @@ entries:
   - title: Rex (@suneastrex27)
     url: about
   - title: Bugs, Chains, Math, and Everything Between.
-
-  - title: All Posts
-    post_list:
-      limit: 10
-      show_more: true
-      show_more_text: See more posts...
-      show_more_url: more_all.html
-
-  - title: RSS
-    url: feed.xml
