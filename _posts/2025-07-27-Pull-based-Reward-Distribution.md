@@ -8,6 +8,7 @@ If you distribute rewards proportionally by iterating through a user list, that'
 ## Table of Contents
 - [Fixed Stake Reward Distribution](#fixed-stake-reward-distribution)
 - [Variable Stake Reward Distribution](#variable-stake-reward-distribution)
+- [Compounding Stake Reward Distribution](#compounding-stake-reward-distribution)
 
 ## [Fixed Stake Reward Distribution](#fixed-stake-reward-distribution)
 In 2018, Bogdan et al.[^1] proposed a scalable on-chain reward distribution method in their paper "Scalable Reward Distribution on the Ethereum Blockchain." The core idea is to globally track the cumulative reward per unit stake, denoted as $S$, updating at each interval, where an interval is any event that changes the total deposit or distributes a reward.
@@ -24,7 +25,7 @@ $$
 reward_{j,t} = stake_{j,t} \times (S_{t} - S_{t-1})
 $$
 
-More memory-effeiciently, instead of storing all $S_{j,t}$ values globally, we can use a map $S_{j,0}$ to record the value of $S$ at the time of participant $j$'s initial deposit. When participant $j$ withdraws their entire stake, the reward is calculated as:
+More memory-effeiciently, instead of storing all $S_{t}$ values globally, we can use a map $S_{deposit}$ to record the value of $S$ at the time of participant $j$'s initial deposit. When participant $j$ withdraws their entire stake, the reward is calculated as:
 
 $$
 reward_{j,t} = stake_{j,t} \times (S - S_{deposit})
@@ -152,7 +153,7 @@ The principle is simple. Instead of summing every individual product, you break 
 We assume $n+1$ rewards, indexed by $t=0, ..., n$, and apply the identity to total rewards to obtain:
 
 $$
-N_{j} = stake_{j,n} \sum_{t=0}^{n} \frac{reward_t}{T_t} - \sum_{t=1}^n ((stake_{j,t} - stake_{j,t-1}) \sum_{t=0}^{t-1} \frac{reward_t}{T_t})
+N_{j} = stake_{j,n} \sum_{t=0}^{n} \frac{reward_t}{T_t} - \sum_{t=1}^n ((stake_{j,t} - stake_{j,t-1}) \sum_{k=0}^{t-1} \frac{reward_k}{T_k})
 $$
 
 We define $R$, short for reward per token, as follows:
@@ -170,7 +171,7 @@ $$
 Thus, we can write:
 
 $$
-N_j = stake_{j,n} * R_n - \sum_{t=1}^{n} (\Delta stake_{j,t} \times R_{t-1})
+N_j = stake_{j,n} \times R_n - \sum_{t=1}^{n} (\Delta stake_{j,t} \times R_{t-1})
 $$
 
 While Bogdan's approach tracks $S$ (reward per token) globally, this approach instead keeps track of:
@@ -182,7 +183,7 @@ $$
 $\Delta stake_{j,t}$ is positive for deposits and negative for withdrawals. Finally, we can calculate $N_j$ as:
 
 $$
-N_j = stake_{j,n} * R_n - tally_{j,n}
+N_j = stake_{j,n} \times R_n - tally_{j,n}
 $$
 
 This is the proof of concept in Python, not for production use. You can also find it in this [gist](https://gist.github.com/suneastrex27/a08d8f51ead40fb1d3060fe07c757dd4).
@@ -269,6 +270,10 @@ if __name__ == "__main__":
     print("Total stake after withdrawals:", solmaz.total_stake)
 ```
 
+## [Compounding Stake Reward Distribution](#compounding-stake-reward-distribution)
+Liquity[^3]
+
 ## Reference
 [^1]: Batog, B., Nowostawski, M., Sylwestrzak, W., "Scalable Reward Distribution on the Ethereum Blockchain," 2018. Available: https://batog.info/papers/scalable-reward-distribution.pdf
 [^2]: Solmaz, "Scalable Reward Distribution with Changing Stake Sizes," https://solmaz.io/2019/02/24/scalable-reward-changing/
+[^3]: Richard P., "Scalable Reward Distribution with Compounding Stakes," 2020. Available: https://github.com/liquity/dev/blob/main/papers/Scalable_Reward_Distribution_with_Compounding_Stakes.pdf
